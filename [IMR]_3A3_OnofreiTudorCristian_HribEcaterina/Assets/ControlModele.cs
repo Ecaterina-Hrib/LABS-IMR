@@ -14,6 +14,17 @@ public class ControlModele : MonoBehaviour
     private GameObject transformModel2;
 
     public float distantaOffset;
+
+    float prelucreazaUnghi(float unghiDePrelucrat) {
+        unghiDePrelucrat %= 360;
+        if (unghiDePrelucrat > 180)
+        {
+            return unghiDePrelucrat - 360;
+        }
+        return unghiDePrelucrat;
+
+    }
+
     void Start()
     {
         animatorPisica1 = pisica1.GetComponentInChildren<Animator>();
@@ -40,20 +51,9 @@ public class ControlModele : MonoBehaviour
         }
 
 
-        float unghiRotatiePisica1 = transformModel1.transform.rotation.eulerAngles.y;
-        float unghiRotatiePisica2 = transformModel2.transform.rotation.eulerAngles.y;
-
-        unghiRotatiePisica1 %= 360;
-        if (unghiRotatiePisica1 > 180)
-        {
-            unghiRotatiePisica1 = unghiRotatiePisica1 - 360;
-        }
-        unghiRotatiePisica2 %= 360;
-        if (unghiRotatiePisica2 > 180)
-        {
-            unghiRotatiePisica2 = unghiRotatiePisica2 - 360;
-        }
-
+        float unghiRotatiePisica1 = prelucreazaUnghi(transformModel1.transform.rotation.eulerAngles.y);
+        float unghiRotatiePisica2 = prelucreazaUnghi(transformModel2.transform.rotation.eulerAngles.y);
+       
         Debug.Log("Distanta: " + distanta);
 
         if (transformModel1.transform.position.x > transformModel2.transform.position.x)
